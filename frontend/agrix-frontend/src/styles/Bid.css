@@ -1,0 +1,204 @@
+/* Bid.css - Updated with more specific class names */
+.bid-page-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.bid-page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #eee;
+}
+
+.bid-page-status {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.bid-page-status span {
+  padding: 0.3rem 0.8rem;
+  border-radius: 20px;
+  font-weight: bold;
+}
+
+.bid-page-status-active {
+  background-color: #d4edda;
+  color: #0B3018;
+}
+
+.bid-page-status-closed {
+  background-color: #f8d7da;
+  color: #721c24;
+}
+
+.bid-page-timer {
+  font-weight: bold;
+  color: #6c757d;
+}
+
+.bid-page-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+}
+
+.bid-page-product {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.bid-page-product-image {
+  width: 100%;
+  max-height: 300px;
+  object-fit: contain;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.bid-page-product-info h2 {
+  margin: 0;
+  color: #2c3e50;
+}
+
+.bid-page-product-description {
+  color: #7f8c8d;
+  margin: 0.5rem 0;
+}
+
+.bid-page-current-price {
+  font-size: 1.2rem;
+  margin-top: 1rem;
+}
+
+.bid-page-current-price span {
+  font-weight: bold;
+  color: #0B3018;
+  font-size: 1.5rem;
+}
+
+.bid-page-main {
+  background: #f8f9fa;
+  padding: 1.5rem;
+  border-radius: 8px;
+}
+
+.bid-page-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.bid-page-form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.bid-page-form-group label {
+  font-weight: 600;
+}
+
+.bid-page-form-group small {
+  color: #6c757d;
+  font-size: 0.8rem;
+}
+
+.bid-page-form-group input {
+  padding: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 1rem;
+  height: calc(1rem + 2 * 1rem + 2px);
+  box-sizing: border-box;
+  width: 100%;
+  transition: border-color 0.2s;
+}
+
+.bid-page-form-group input:focus {
+  border-color: #0B3018;
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(11, 48, 24, 0.2);
+}
+
+.bid-page-submit {
+  background-color: #0B3018;
+  color: white;
+  border: none;
+  padding: 1rem;
+  border-radius: 4px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  height: calc(1rem + 2 * 1rem);
+  width: 100%;
+}
+
+.bid-page-submit:hover {
+  background-color: #0e3a1e;
+}
+
+.bid-page-closed {
+  background-color: #fff3cd;
+  padding: 1rem;
+  border-radius: 4px;
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.bid-page-closed h3 {
+  margin-top: 0;
+  color: #856404;
+}
+
+.bid-page-history {
+  border-top: 1px solid #eee;
+  padding-top: 1rem;
+}
+
+.bid-page-history h3 {
+  margin-top: 0;
+}
+
+.bid-page-history-list {
+  list-style: none;
+  padding: 0;
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.bid-page-history-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid #eee;
+}
+
+.bid-page-amount {
+  font-weight: bold;
+  color: #0B3018;
+}
+
+.bid-page-time {
+  color: #7f8c8d;
+  font-size: 0.9rem;
+}
+
+@media (max-width: 768px) {
+  .bid-page-content {
+      grid-template-columns: 1fr;
+  }
+  
+  .bid-page-header {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 1rem;
+  }
+}

@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test API PlantID & OpenRouter</title>
+    <script>
+        function sendQuestion(event) {
+            event.preventDefault();
+            let question = document.getElementById("question").value;
+
+            fetch("http://127.0.0.1:8000/api/ask/", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ question: question })
+            })
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById("response_text").innerText = data.response || "Erreur API";
+            })
+            .catch(error => {
+                console.error("Erreur :", error);
+                document.getElementById("response_text").innerText = "Erreur de connexion.";
+            });
+        }
+    </script>
+</head>
+<body>
+
+    <h2>Test d'envoi d'image à l'API PlantID</h2>
+    <form action="http://127.0.0.1:8000/api/plantid/" method="post" enctype="multipart/form-data">
+        <label for="image">Choisir une image :</label>
+        <input type="file" name="image" id="image" required>
+        <br><br>
+        <button type="submit">Envoyer</button>
+    </form>
+
+    <hr>
+
+    <h2>Test de l'API OpenRouter</h2>
+    <form onsubmit="sendQuestion(event)">
+        <label for="question">Posez une question :</label>
+        <input type="text" id="question" required>
+        <button type="submit">Envoyer</button>
+    </form>
+    <p><strong>Réponse :</strong> <span id="response_text"></span></p>
+
+    <hr>
+
+    <h2>Enregistrer et envoyer un message vocal</h2>
+    <button id="recordButton">🎤 Enregistrer</button>
+    <button id="stopButton" disabled>⏹️ Arrêter</button>
+    <p><strong>Réponse :</strong> <span id="response_audio"></span></p>
+
+    <script>
+        let mediaRecorder;
+        let audioChunks = [];
+
+        document.getElementById("recordButton").addEventListener("click", async function () {
+            try {
+                let stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+                mediaRecorder = new MediaRecorder(stream);
+
+                mediaRecorder.ondataavailable = event => {
+                    audioChunks.push(event.data);
+                };
+
+                mediaRecorder.onstop = async function () {
+                    let audioBlob = new Blob(audioChunks, { type: "audio/webm" });
+                    let formData = new FormData();
+                    formData.append("audio", audioBlob, "recorded_audio.webm");
+
+                    console.log("Envoi du fichier audio...");
+
+                    fetch("http://127.0.0.1:8000/api/ask_audio/", {
+                        method: "POST",
+                        body: formData
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        console.log("Réponse API :", data);
+                        document.getElementById("response_audio").innerText = data.response || "Erreur API";
+                    })
+                    .catch(error => {
+                        console.error("Erreur :", error);
+                        document.getElementById("response_audio").innerText = "Erreur de connexion.";
+                    });
+
+                    audioChunks = [];
+                };
+
+                mediaRecorder.start();
+                document.getElementById("recordButton").disabled = true;
+                document.getElementById("stopButton").disabled = false;
+            } catch (error) {
+                console.error("Erreur lors de l'accès au microphone :", error);
+                alert("Erreur : Impossible d'accéder au microphone.");
+            }
+        });
+
+        document.getElementById("stopButton").addEventListener("click", function () {
+            mediaRecorder.stop();
+            document.getElementById("recordButton").disabled = false;
+            document.getElementById("stopButton").disabled = true;
+        });
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,626 @@
+/* Payment.css */
+
+/* Base Styles */
+.pay-page {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 1rem;
+    color: #333;
+    min-height: 100vh;
+  }
+  
+  .pay-header {
+    display: flex;
+    flex-direction: column;
+    gap: 0.9rem;
+    margin-bottom: 1rem;
+  }
+  
+  .pay-back-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: none;
+    border: none;
+    color: #0B3018;
+    font-weight: 600;
+    cursor: pointer;
+    padding: 0.5rem 0;
+    font-size: 1rem;
+    transition: color 0.2s;
+  }
+  
+  .pay-back-btn:hover {
+    color: #3a56d4;
+  }
+  
+  .pay-progress-bar {
+    width: 100%;
+    height: 6px;
+    background-color: #e0e0e0;
+    border-radius: 3px;
+    overflow: hidden;
+  }
+  
+  .pay-progress-fill {
+    height: 100%;
+    background-color: #0B3018;
+    transition: width 0.5s ease;
+  }
+  
+  /* Step Containers */
+  .pay-step-container {
+    background: white;
+    border-radius: 12px;
+    padding: 1rem;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    margin-top: 1rem;
+  }
+  
+  .pay-step-container h2 {
+    margin-bottom: 1.5rem;
+    color: #2c3e50;
+    font-size: 1.8rem;
+  }
+  
+  /* Product Details Step */
+  .pay-product-card {
+    display: flex;
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+    padding: 1rem;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+  }
+  
+  .pay-product-image-container {
+    position: relative;
+    width: 120px;
+    height: 120px;
+    flex-shrink: 0;
+  }
+  
+  .pay-product-image-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 8px;
+  }
+  
+  .pay-quantity-badge {
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    background-color:#0B3018;
+    color: white;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 0.9rem;
+  }
+  
+  .pay-product-info {
+    flex-grow: 1;
+  }
+  
+  .pay-product-info h3 {
+    margin: 0 0 0.5rem 0;
+    font-size: 1.2rem;
+  }
+  
+  .pay-product-description {
+    color: #666;
+    margin: 0 0 1rem 0;
+    font-size: 0.9rem;
+  }
+  
+  .pay-price-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .pay-price {
+    font-weight: bold;
+    color: #0B3018;
+    font-size: 1.1rem;
+  }
+  
+  .pay-quantity-controls {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  
+  .pay-quantity-controls button {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    border: 1px solid #ddd;
+    background: white;
+    font-size: 1rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+  }
+  
+  .pay-quantity-controls button:hover {
+    background: #f0f0f0;
+  }
+  
+  .pay-quantity-controls button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+  
+  .pay-quantity-controls input {
+    width: 40px;
+    height: 30px;
+    text-align: center;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+  }
+  
+  /* Summary Card */
+  .pay-summary-card {
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+  }
+  
+  .pay-summary-card h3 {
+    margin-top: 0;
+    margin-bottom: 1rem;
+    font-size: 1.2rem;
+  }
+  
+  .pay-summary-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0.8rem;
+    font-size: 0.95rem;
+  }
+  
+  .pay-grand-total {
+    font-weight: bold;
+    font-size: 1.1rem;
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid #ddd;
+  }
+  
+  /* Form Styles */
+  .pay-form-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  .pay-full-width {
+    grid-column: span 2;
+  }
+  
+  .pay-form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  
+  .pay-form-group label {
+    font-weight: 600;
+    font-size: 0.9rem;
+  }
+  
+  .pay-form-group input,
+  .pay-form-group select {
+    padding: 0.8rem;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 1rem;
+    transition: border 0.2s;
+  }
+  
+  .pay-form-group input:focus,
+  .pay-form-group select:focus {
+    outline: none;
+    border-color: #0B3018;
+    box-shadow: 0 0 0 2px rgba(74, 107, 255, 0.2);
+  }
+  
+  .pay-input-with-icon {
+    position: relative;
+  }
+  
+  .pay-input-with-icon svg {
+    position: absolute;
+    left: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #777;
+  }
+  
+  .pay-input-with-icon input {
+    padding-left: 40px !important;
+  }
+  
+  .pay-error {
+    color: #e74c3c;
+    font-size: 0.8rem;
+    margin-top: 0.2rem;
+  }
+  
+  /* Payment Method Tabs */
+  .pay-payment-methods {
+    margin-bottom: 2rem;
+  }
+  
+  .pay-method-tabs {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  .pay-method-tabs button {
+    flex: 1;
+    padding: 1rem;
+    background: none;
+    border: none;
+    border-bottom: 3px solid transparent;
+    font-weight: 600;
+    color: #666;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  
+  .pay-method-tabs button.pay-active {
+    color: #0B3018;
+    border-bottom-color: #0B3018;
+  }
+  
+  .pay-method-tabs button:not(.pay-active):hover {
+    color: #333;
+  }
+  
+  /* Card Preview */
+  .pay-card-preview {
+    margin-bottom: 2rem;
+    perspective: 1000px;
+  }
+  
+  .pay-card-front {
+    background: linear-gradient(135deg, #4a6bff, #6a5acd);
+    color: white;
+    padding: 1.5rem;
+    border-radius: 12px;
+    height: 180px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    box-shadow: 0 8px 20px rgba(74, 107, 255, 0.3);
+    transform-style: preserve-3d;
+  }
+  
+  .pay-card-logo {
+    align-self: flex-end;
+    font-weight: bold;
+    font-size: 1.2rem;
+  }
+  
+  .pay-card-number {
+    font-size: 1.4rem;
+    letter-spacing: 2px;
+    word-spacing: 8px;
+    text-align: center;
+    margin: 1rem 0;
+    font-family: 'Courier New', monospace;
+  }
+  
+  .pay-card-bottom {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .pay-card-name {
+    text-transform: uppercase;
+    font-size: 0.9rem;
+    letter-spacing: 1px;
+  }
+  
+  .pay-card-expiry {
+    font-size: 0.9rem;
+  }
+  
+  /* Save Info Checkbox */
+  .pay-save-info {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 1rem;
+  }
+  
+  .pay-save-info input {
+    width: 18px;
+    height: 18px;
+  }
+  
+  /* PayPal Form */
+  .pay-paypal-form {
+    background-color: #f9f9f9;
+    padding: 2rem;
+    border-radius: 8px;
+    text-align: center;
+    margin-bottom: 1.5rem;
+  }
+  
+  .pay-paypal-form p {
+    margin: 0.5rem 0;
+  }
+  
+  /* Form Actions */
+  .pay-form-actions {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 2rem;
+  }
+  
+  .pay-continue-btn,
+  .pay-now-btn {
+    background-color: #0B3018;
+    color: white;
+    border: none;
+    padding: 1rem 2rem;
+    border-radius: 6px;
+    font-weight: 600;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.2s;
+  }
+  
+  .pay-continue-btn:hover,
+  .pay-now-btn:hover {
+    background-color: #3a56d4;
+  }
+  
+  .pay-back-btn {
+    background: none;
+    border: 1px solid #ddd;
+    padding: 1rem 2rem;
+    border-radius: 6px;
+    font-weight: 600;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  
+  .pay-back-btn:hover {
+    background-color: #f5f5f5;
+  }
+  
+  /* Processing Step */
+  .pay-processing-container {
+    text-align: center;
+    padding: 3rem 2rem;
+  }
+  
+  .pay-processing-animation {
+    margin-bottom: 2rem;
+  }
+  
+  .pay-circle-loader {
+    width: 80px;
+    height: 80px;
+    margin: 0 auto;
+    border: 8px solid #f3f3f3;
+    border-top: 8px solid #0B3018;
+    border-radius: 50%;
+    animation: spin 1.5s linear infinite;
+  }
+  
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+  
+  .pay-processing-container h2 {
+    margin-bottom: 1rem;
+  }
+  
+  .pay-processing-container p {
+    color: #666;
+    margin-bottom: 2rem;
+  }
+  
+  .pay-processing-details {
+    max-width: 400px;
+    margin: 0 auto;
+    background-color: #f9f9f9;
+    padding: 1.5rem;
+    border-radius: 8px;
+    text-align: left;
+  }
+  
+  .pay-detail {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0.8rem;
+    font-size: 0.95rem;
+  }
+  
+  .pay-detail span:first-child {
+    font-weight: 600;
+    color: #555;
+  }
+  
+  /* Result Steps */
+  .pay-result-container {
+    text-align: center;
+    padding: 3rem 2rem;
+    max-width: 600px;
+    margin: 0 auto;
+    border-radius: 12px;
+  }
+  
+  .pay-result-icon {
+    font-size: 5rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  .pay-result-container h2 {
+    margin-bottom: 1rem;
+  }
+  
+  .pay-confirmation-message,
+  .pay-error-message {
+    font-size: 1.1rem;
+    margin-bottom: 2rem;
+    line-height: 1.6;
+  }
+  
+  .pay-order-details,
+  .pay-shipping-info {
+    background-color: #f9f9f9;
+    padding: 1.5rem;
+    border-radius: 8px;
+    margin-bottom: 1.5rem;
+    text-align: left;
+  }
+  
+  .pay-order-details h3,
+  .pay-shipping-info h3 {
+    margin-top: 0;
+    margin-bottom: 1rem;
+    font-size: 1.2rem;
+  }
+  
+  .pay-error-details {
+    background-color: #fef0f0;
+    padding: 1rem;
+    border-radius: 6px;
+    margin-bottom: 2rem;
+    color: #e74c3c;
+    font-size: 0.9rem;
+  }
+  
+  .pay-error-details p {
+    margin: 0.3rem 0;
+  }
+  
+  .pay-action-buttons {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  
+  .pay-continue-shopping-btn {
+    background-color: #0B3018;
+    color: white;
+    border: none;
+    padding: 1rem 2rem;
+    border-radius: 6px;
+    font-weight: 600;
+    cursor: pointer;
+  }
+  
+  .pay-print-receipt-btn,
+  .pay-try-again-btn,
+  .pay-change-method-btn {
+    background-color: white;
+    color: #0B3018;
+    border: 1px solid #0B3018;
+    padding: 1rem 2rem;
+    border-radius: 6px;
+    font-weight: 600;
+    cursor: pointer;
+  }
+  
+  .pay-try-again-btn {
+    background-color: #0B3018;
+    color: white;
+    border: none;
+  }
+  
+  .pay-change-method-btn {
+    background-color: white;
+    color: #0B3018;
+  }
+  
+  /* Success/Failure States */
+  .pay-success .pay-result-icon {
+    color: #2ecc71;
+  }
+  
+  .pay-failed .pay-result-icon {
+    color: #e74c3c;
+  }
+  
+  /* No Product State */
+  .pay-no-product {
+    text-align: center;
+    padding: 3rem 2rem;
+  }
+  
+  .pay-no-product h2 {
+    margin-bottom: 1.5rem;
+  }
+  
+  /* Responsive Adjustments */
+  @media (max-width: 768px) {
+    .pay-page {
+      padding: 1rem;
+    }
+    
+    .pay-form-grid {
+      grid-template-columns: 1fr;
+    }
+    
+    .pay-full-width {
+      grid-column: span 1;
+    }
+    
+    .pay-product-card {
+      flex-direction: column;
+    }
+    
+    .pay-product-image-container {
+      width: 100%;
+      height: 200px;
+    }
+    
+    .pay-form-actions,
+    .pay-action-buttons {
+      flex-direction: column;
+      gap: 1rem;
+    }
+    
+    .pay-back-btn,
+    .pay-continue-btn,
+    .pay-now-btn,
+    .pay-continue-shopping-btn,
+    .pay-print-receipt-btn,
+    .pay-try-again-btn,
+    .pay-change-method-btn {
+      width: 100%;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .pay-method-tabs {
+      flex-direction: column;
+    }
+    
+    .pay-card-number {
+      font-size: 1.1rem;
+      letter-spacing: 1px;
+      word-spacing: 4px;
+    }
+  }

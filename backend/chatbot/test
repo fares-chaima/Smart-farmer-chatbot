@@ -1,0 +1,4 @@
+Invoke-RestMethod -Uri "http://127.0.0.1:8000/api/ask/" `
+    -Method POST `
+    -Headers @{"Content-Type"="application/json"} `
+    -Body '{"question": "my tomato is yallow comment je doit fixer ca  ?"}'

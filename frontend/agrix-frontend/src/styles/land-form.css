@@ -1,0 +1,222 @@
+/* styles/land-form.css */
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+/* Variables */
+:root {
+  --primary-color: #0B3018; /* Vert foncé */
+  --accent-color: #B5E7AC; /* Vert clair */
+  --primary-dark: #072511;
+  --accent-dark: #95C98C;
+  --background-light: #FFFFFF;
+  --text-light: #2B382D;
+  --text-muted: #5A6B5D; /* Utilisé pour le bouton Annuler */
+  --border-light: #D8E6D9;
+  --shadow-sm: 0 2px 4px rgba(11, 48, 24, 0.1);
+  --shadow-md: 0 4px 8px rgba(11, 48, 24, 0.15);
+  --transition: all 0.3s ease;
+  --border-radius: 6px;
+}
+
+/* Modal Overlay */
+.land-form-modal {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(11, 48, 24, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  backdrop-filter: blur(3px);
+  animation: fadeIn 0.3s ease-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* Modal Content */
+.modal-content {
+  background-color: var(--background-light);
+  border-radius: var(--border-radius);
+  width: 90%;
+  max-width: 500px;
+  max-height: 85vh;
+  overflow-y: auto;
+  box-shadow: var(--shadow-md);
+  padding: 1.25rem;
+  font-family: 'Poppins', sans-serif;
+  transition: var(--transition);
+}
+
+.land-form-modal:hover .modal-content {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-md);
+}
+
+.modal-content h2 {
+  color: var(--primary-color);
+  font-size: 1.5rem;
+  font-weight: 600;
+  text-align: center;
+  margin: 0 0 0.75rem;
+  padding-bottom: 0.4rem;
+  position: relative;
+}
+
+.modal-content h2::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 40px;
+  height: 2px;
+  background-color: var(--primary-color);
+  border-radius: 2px;
+}
+
+/* Form Elements */
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.form-group label {
+  font-weight: 500;
+  color: var(--primary-color);
+  font-size: 0.85rem;
+}
+
+.form-group input,
+.form-group textarea {
+  padding: 0.5rem;
+  border: 1px solid var(--border-light);
+  border-radius: var(--border-radius);
+  font-size: 0.9rem;
+  font-family: 'Poppins', sans-serif;
+  background-color: #F8FAF7;
+  color: var(--text-light);
+  transition: var(--transition);
+  height: 2rem;
+  box-sizing: border-box;
+}
+
+.form-group textarea {
+  height: 4rem;
+  resize: vertical;
+  min-height: 4rem;
+  max-height: 8rem;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 2px rgba(11, 48, 24, 0.2);
+  background-color: var(--background-light);
+}
+
+/* Form Layout */
+.form-row {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.form-row .form-group {
+  flex: 1;
+}
+
+/* Form Actions */
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.5rem;
+  margin-top: 0.75rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid var(--border-light);
+}
+
+.form-actions button {
+  padding: 0.5rem 1rem;
+  border-radius: var(--border-radius);
+  font-weight: 500;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: var(--transition);
+  border: none;
+}
+
+.form-actions button[type="button"] {
+  background-color: var(--text-muted); /* Changé de #D8E6D9 à #5A6B5D */
+  color: var(--background-light); /* Blanc pour contraste */
+}
+
+.form-actions button[type="button"]:hover {
+  background-color: #485755; /* Légère variation plus sombre de #5A6B5D */
+  transform: translateY(-2px);
+}
+
+.form-actions button[type="submit"] {
+  background-color: var(--accent-color);
+  color: var(--primary-color);
+  box-shadow: var(--shadow-sm);
+}
+
+.form-actions button[type="submit"]:hover {
+  background-color: var(--accent-dark);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .modal-content {
+    padding: 1rem;
+    max-width: 450px;
+  }
+
+  .form-row {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .form-actions {
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+
+  .form-actions button {
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .modal-content {
+    padding: 0.75rem;
+    width: 95%;
+  }
+
+  .modal-content h2 {
+    font-size: 1.3rem;
+    margin-bottom: 0.5rem;
+  }
+
+  form {
+    gap: 0.5rem;
+  }
+
+  .form-group input,
+  .form-group textarea {
+    padding: 0.4rem;
+    font-size: 0.85rem;
+  }
+}

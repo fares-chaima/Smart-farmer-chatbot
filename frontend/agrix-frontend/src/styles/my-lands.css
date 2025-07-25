@@ -1,0 +1,949 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+
+:root {
+    /* Palette de couleurs avec #B5E7AC et #0B3018 */
+    --primary-color: #0B3018;
+    --primary-light: #1C4D2E;
+    --primary-dark: #072511;
+    --accent-color: #B5E7AC;
+    --accent-light: #D4F2CF;
+    --accent-dark: #95C98C;
+    --secondary-color: #E7C3A1;
+    --neutral-color: #5A6B5D;
+    
+    /* Arrière-plans et textes */
+    --background-light: #FFFFFF; /* Changé en blanc pur */
+    --background-dark: #1A1E1B;
+    --text-light: #2B382D;
+    --text-dark: #EAEFE8;
+    --card-bg-light: #FFFFFF;
+    --card-bg-dark: #2C332D;
+    --border-light: #D8E6D9;
+    --border-dark: #3F4A40;
+    
+    /* Effets et transitions */
+    --shadow-sm: 0 2px 6px rgba(11, 48, 24, 0.08);
+    --shadow-md: 0 4px 12px rgba(11, 48, 24, 0.12);
+    --shadow-lg: 0 6px 18px rgba(11, 48, 24, 0.16);
+    --transition-fast: all 0.2s ease;
+    --transition-normal: all 0.3s ease;
+    --border-radius-sm: 5px;
+    --border-radius-md: 8px;
+    --border-radius-lg: 12px;
+  }
+  
+  /* Styles généraux et animations */
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  
+  @keyframes spin {
+    to { transform: rotate(360deg); }
+  }
+  
+  @keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+  }
+  
+  
+  .dark-mode {
+    background-color: var(--background-dark);
+    color: var(--text-dark);
+  }
+  
+  .dark-mode .my-lands-container {
+    background-color: var(--background-dark);
+  }
+  
+  .dark-mode .landing-banner {
+    background-color: var(--primary-dark); 
+    box-shadow: var(--shadow-lg);
+  }
+  
+  .dark-mode .banner-content h1 {
+    color: var(--accent-color);
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  }
+  
+  .dark-mode .banner-content p {
+    color: var(--text-dark);
+  }
+  
+  .dark-mode .my-lands-search,
+  .dark-mode .filters-panel,
+  .dark-mode .filters-panel select,
+  .dark-mode .filters-panel input,
+  .dark-mode .filter-toggle,
+  .dark-mode .land-card,
+  .dark-mode .no-lands-message {
+    background-color: var(--card-bg-dark);
+    color: var(--text-dark);
+    border-color: var(--border-dark);
+  }
+  
+  .dark-mode .my-lands-search::placeholder {
+    color: rgba(234, 239, 232, 0.5);
+  }
+  
+  .dark-mode .filter-group label,
+  .dark-mode .land-card-location,
+  .dark-mode .land-card-details li span {
+    color: var(--accent-light);
+  }
+  
+  .dark-mode .reset-filters {
+    color: var(--accent-color);
+  }
+  
+  .dark-mode .reset-filters:hover {
+    color: var(--accent-light);
+  }
+  
+  .dark-mode .filter-toggle:hover,
+  .dark-mode .my-lands-search:focus {
+    border-color: var(--accent-color);
+    box-shadow: 0 0 0 2px rgba(181, 231, 172, 0.3);
+  }
+  
+  /* Main container */
+  .my-lands-container {
+    padding-top: 70px; 
+    padding-bottom: 70px; 
+    font-family: 'Poppins', sans-serif;
+    min-height: 100vh;
+    background-color: #FFFFFF; 
+    transition: var(--transition-normal);
+  }
+  
+  /* Banner avec couleur solide et sans margin left/right */
+  .landing-banner {
+    background-color: var( --primary-color); /* Remplacé gradient par couleur solide */
+    margin-bottom: 40px;
+    margin-left: 0; 
+    margin-right: 0; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-light);
+    text-align: center;
+    overflow: hidden;
+    position: relative;
+    transition: var(--transition-normal);
+    padding: 10px 0;
+    height: 250px;
+  }
+  
+  .landing-banner:hover {
+    box-shadow: var(--shadow-lg);
+    transform: translateY(-3px);
+  }
+  
+  .banner-content {
+    padding: 20px;
+    max-width: 800px;
+    animation: fadeIn 0.8s ease-out;
+    z-index: 2;
+  }
+  
+  .banner-content h1 {
+    font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+  }
+  
+  .banner-content p {
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.3rem;
+    max-width: 650px;
+    margin: 0 auto;
+    line-height: 1.4;
+  }
+  
+  /* Header */
+  .my-lands-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 35px;
+    flex-wrap: wrap;
+  }
+  
+  .header-left, .header-right {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+  }
+  
+  .my-lands-title {
+    font-family: 'Poppins', sans-serif;
+    font-size: 2.2rem;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-left: 50px;
+    font-weight: 700;
+    color: var(--primary-color);
+  }
+  
+  .lands-count {
+    background-color: var(--accent-color);
+    color: var(--primary-color);
+    padding: 5px 15px;
+    border-radius: 10px;
+    font-size: 1rem;
+    font-weight: 600;
+    box-shadow: var(--shadow-sm);
+    transition: var(--transition-fast);
+  }
+  
+  .lands-count:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+  }
+  
+  /* Theme toggle avec animation */
+  .theme-toggle {
+    background: none;
+    border: 2px solid var(--accent-color);
+    font-size: 1.2rem;
+    cursor: pointer;
+    margin-right: 15px;
+    padding: 8px;
+    border-radius: 50%;
+    width: 42px;
+    height: 42px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: var(--transition-normal);
+    color: var(--primary-color);
+    background-color: var(--background-light);
+  }
+  
+  .dark-mode .theme-toggle {
+    border-color: var(--accent-dark);
+    color: var(--accent-color);
+    background-color: var(--primary-dark);
+  }
+  
+  .theme-toggle:hover {
+    transform: rotate(360deg);
+    background-color: var(--accent-light);
+  }
+  
+  .dark-mode .theme-toggle:hover {
+    background-color: var(--primary-light);
+  }
+  
+  /* Navigation button */
+  .nav-button {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background-color: var(--primary-color);
+    color: var(--accent-light);
+    border: none;
+    padding: 12px 20px;
+    border-radius: var(--border-radius-md);
+    cursor: pointer;
+    font-weight: 600;
+    transition: var(--transition-fast);
+    box-shadow: var(--shadow-sm);
+    position: relative;
+    overflow: hidden;
+    margin-right: 50px;
+  }
+  
+  .nav-button::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.1); /* Remplacé gradient par couleur solide */
+    transform: translateX(-100%);
+    transition: transform 0.6s ease;
+  }
+  
+  .nav-button:hover {
+    background-color: var(--primary-dark);
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-md);
+  }
+  
+  .nav-button:hover::after {
+    transform: translateX(100%);
+  }
+  
+  .nav-button:active {
+    transform: translateY(-1px);
+  }
+  
+  /* Controls */
+  .my-lands-controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+  
+  .search-wrapper {
+    position: relative;
+    flex-grow: 1;
+    max-width: 800px;
+    display: flex;
+    align-items: center;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  .search-icon {
+    position: absolute;
+    left: 15px;
+    pointer-events: none;
+    color: var(--neutral-color);
+    transition: var(--transition-fast);
+  }
+  
+  .my-lands-search:focus + .search-icon {
+    color: var(--primary-color);
+  }
+  
+  .my-lands-search {
+    width: 100%;
+    padding: 14px 20px 14px 45px;
+    border: 2px solid var(--border-light);
+    border-radius: var(--border-radius-md);
+    font-size: 1.05rem;
+    transition: var(--transition-normal);
+    background-color: var(--card-bg-light);
+    color: var(--text-light);
+  }
+  
+  .my-lands-search::placeholder {
+    color: var(--neutral-color);
+    opacity: 0.7;
+  }
+  
+  .my-lands-search:focus {
+    outline: none;
+    border-color: var(--accent-color);
+    box-shadow: 0 0 0 3px rgba(181, 231, 172, 0.3);
+  }
+  
+  .filter-toggle {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: none;
+    border: 2px solid var(--border-light);
+    padding: 15px 18px;
+    border-radius: var(--border-radius-md);
+    cursor: pointer;
+    transition: var(--transition-fast);
+    font-weight: 500;
+    color: var(--primary-color);
+    margin-left: 10px;
+    
+  }
+  
+  .filter-toggle:hover {
+    background-color: var(--accent-light);
+    border-color: var(--accent-color);
+  }
+  
+  .filter-toggle svg {
+    transition: var(--transition-fast);
+  }
+  
+  .filter-toggle:hover svg {
+    transform: rotate(90deg);
+  }
+  
+  /* Add button */
+  .add-button {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background-color:#0B3018;
+    color:white;
+    border: none;
+    padding: 14px 24px;
+    border-radius: var(--border-radius-md);
+    cursor: pointer;
+    font-weight: 600;
+    transition: var(--transition-fast);
+    box-shadow: var(--shadow-sm);
+    position: relative;
+    overflow: hidden;
+    margin-right: 50px;
+  }
+  
+  .add-button::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.2); /* Remplacé gradient par couleur solide */
+    transform: translateX(-100%);
+    transition: transform 0.6s ease;
+  }
+  
+  .add-button:hover {
+    background-color: var(--accent-dark);
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-md);
+  }
+  
+  .add-button:hover::after {
+    transform: translateX(100%);
+  }
+  
+  .add-button:active {
+    transform: translateY(-1px);
+  }
+  
+  /* Filters panel */
+  .filters-panel {
+    background-color: var(--card-bg-light);
+    border: 1px solid var(--border-light);
+    border-radius: var(--border-radius-lg);
+    padding: 25px;
+    margin-bottom: 30px;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 20px;
+    box-shadow: var(--shadow-md);
+    animation: fadeIn 0.4s ease-out;
+  }
+  
+  .filters-section-title {
+    grid-column: 1 / -1;
+    margin: 0 0 15px;
+    font-size: 1.2rem;
+    color: var(--primary-color);
+    border-bottom: 2px solid var(--accent-light);
+    padding-bottom: 10px;
+  }
+  
+  .filter-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  
+  .filter-group label {
+    margin-bottom: 3px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    color: var(--primary-color);
+  }
+  
+  .filter-group select,
+  .filter-group input {
+    padding: 10px 14px;
+    border: 2px solid var(--border-light);
+    border-radius: var(--border-radius-sm);
+    font-size: 0.95rem;
+    transition: var(--transition-fast);
+    background-color: var(--card-bg-light);
+    color: var(--text-light);
+  }
+  
+  .filter-group select:focus,
+  .filter-group input:focus {
+    outline: none;
+    border-color: var(--accent-color);
+    box-shadow: 0 0 0 2px rgba(181, 231, 172, 0.2);
+  }
+  
+  .filter-actions {
+    grid-column: 1 / -1;
+    display: flex;
+    justify-content: flex-end;
+    gap: 15px;
+    margin-top: 10px;
+  }
+  
+  .apply-filters {
+    background-color: var(--primary-color);
+    color: var(--accent-light);
+    border: none;
+    padding: 10px 20px;
+    border-radius: var(--border-radius-sm);
+    cursor: pointer;
+    font-weight: 500;
+    transition: var(--transition-fast);
+  }
+  
+  .apply-filters:hover {
+    background-color: var(--primary-dark);
+    transform: translateY(-2px);
+  }
+  
+  .reset-filters {
+    background: none;
+    border: none;
+    color: var(--primary-color);
+    cursor: pointer;
+    font-size: 0.95rem;
+    text-decoration: underline;
+    padding: 10px;
+    transition: var(--transition-fast);
+  }
+  
+  .reset-filters:hover {
+    color: var(--primary-dark);
+    transform: translateY(-2px);
+  }
+  
+  /* Grid avec animation */
+  .my-lands-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, 350px); /* Largeur fixe */
+    justify-content: center; /* Centre les cartes si elles ne remplissent pas la largeur */
+    gap: 30px;
+    margin-top: 25px;
+    padding: 0 20px;
+  }
+  
+  .land-card {
+    background-color: var(--card-bg-light);
+    border-radius: var(--border-radius-lg);
+    overflow: hidden;
+    box-shadow: var(--shadow-md);
+    transition: var(--transition-normal);
+    position: relative;
+    animation: fadeIn 0.6s ease-out;
+    animation-fill-mode: both;
+    border: 1px solid var(--border-light);
+    width: 360px; 
+    margin-left: 0;
+  }
+  
+  .land-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-lg);
+  }
+  
+  .land-card-image {
+    height: 180px;
+    width: 100%;
+    object-fit: cover;
+    transition: var(--transition-normal);
+  }
+  
+  .land-card:hover .land-card-image {
+    transform: scale(1.05);
+  }
+  
+  .land-card-body {
+    padding: 20px;
+  }
+  
+  .land-card-title {
+    font-size: 1.4rem;
+    margin: 0 0 10px;
+    color: var(--primary-color);
+    font-weight: 700;
+  }
+  
+  .land-card-location {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--neutral-color);
+    font-size: 0.95rem;
+    margin-bottom: 15px;
+  }
+  
+  .land-card-details {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+  
+  .land-card-details li {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .land-card-details li span:first-child {
+    font-size: 0.85rem;
+    color: var(--neutral-color);
+  }
+  
+  .land-card-details li span:last-child {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--primary-dark);
+  }
+  
+  .land-card-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
+    padding-top: 15px;
+    border-top: 1px solid var(--border-light);
+  }
+  
+  .land-card-price {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--primary-color);
+  }
+  
+  .land-card-action {
+    background-color: var(--accent-color);
+    color: var(--primary-dark);
+    border: none;
+    padding: 8px 16px;
+    border-radius: var(--border-radius-sm);
+    cursor: pointer;
+    font-weight: 600;
+    transition: var(--transition-fast);
+  }
+  
+  .land-card-action:hover {
+    background-color: var(--accent-dark);
+    transform: translateY(-2px);
+  }
+  
+  .land-status-tag {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    box-shadow: var(--shadow-sm);
+  }
+  
+  .status-available {
+    background-color: var(--accent-color);
+    color: var(--primary-dark);
+  }
+  
+  .status-sold {
+    background-color: var(--secondary-color);
+    color: var(--primary-dark);
+  }
+  
+  .status-pending {
+    background-color: var(--neutral-color);
+    color: white;
+  }
+  
+  /* Loading state */
+  .loading-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 300px;
+    gap: 20px;
+  }
+  
+  .loading-spinner {
+    width: 60px;
+    height: 60px;
+    border: 5px solid rgba(181, 231, 172, 0.3);
+    border-radius: 50%;
+    border-top-color: var(--accent-color);
+    animation: spin 1s ease-in-out infinite;
+  }
+  
+  .loading-text {
+    color: var(--primary-color);
+    font-size: 1.1rem;
+    font-weight: 500;
+    animation: pulse 1.5s ease-in-out infinite;
+  }
+  
+  /* No lands message */
+  .no-lands-message {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 60px 30px;
+    background-color: var(--card-bg-light);
+    border-radius: var(--border-radius-lg);
+    box-shadow: var(--shadow-md);
+    animation: fadeIn 0.5s ease-out;
+    border: 1px solid var(--border-light);
+  }
+  
+  .no-lands-icon {
+    font-size: 3rem;
+    color: var(--accent-color);
+    margin-bottom: 20px;
+  }
+  
+  .no-lands-message h3 {
+    font-size: 1.6rem;
+    color: var(--primary-color);
+    margin: 0 0 15px;
+  }
+  
+  .no-lands-message p {
+    max-width: 550px;
+    margin: 0 auto 30px;
+    color: var(--neutral-color);
+    font-size: 1.1rem;
+    line-height: 1.6;
+  }
+  
+  /* Contact modal */
+  .contact-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(11, 48, 24, 0.7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    animation: fadeIn 0.3s ease-out;
+    backdrop-filter: blur(5px);
+  }
+  
+  .contact-modal-content {
+    background-color: var(--card-bg-light);
+    padding: 35px;
+    border-radius: var(--border-radius-lg);
+    max-width: 550px;
+    width: 90%;
+    box-shadow: var(--shadow-lg);
+    position: relative;
+    animation: fadeIn 0.4s ease-out;
+    border: 1px solid var(--border-light);
+  }
+  
+  .dark-mode .contact-modal-content {
+    background-color: var(--card-bg-dark);
+    border-color: var(--border-dark);
+  }
+  
+  .modal-close-icon {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: var(--primary-color);
+    transition: var(--transition-fast);
+  }
+  
+  .modal-close-icon:hover {
+    color: var(--primary-dark);
+    transform: rotate(90deg);
+  }
+  
+  .contact-modal-title {
+    font-size: 1.8rem;
+    color: var(--primary-color);
+    margin: 0 0 20px;
+    padding-bottom: 15px;
+    border-bottom: 2px solid var(--accent-light);
+  }
+  
+  .contact-details {
+    margin: 25px 0;
+    line-height: 1.6;
+  }
+  
+  .contact-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 15px;
+  }
+  
+  .contact-item-icon {
+    font-size: 1.2rem;
+    color: var(--accent-color);
+  }
+  
+  .contact-item a {
+    color: var(--primary-color);
+    text-decoration: none;
+    transition: var(--transition-fast);
+  }
+  
+  .contact-item a:hover {
+    color: var(--accent-color);
+    text-decoration: underline;
+  }
+  
+  .modal-close-button {
+    background-color: var(--primary-color);
+    color: var(--accent-light);
+    border: none;
+    padding: 12px 25px;
+    border-radius: var(--border-radius-md);
+    cursor: pointer;
+    font-weight: 600;
+    transition: var(--transition-fast);
+    display: block;
+    margin: 0 auto;
+  }
+  
+  .modal-close-button:hover {
+    background-color: var(--primary-dark);
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-md);
+  }
+  
+  /* Pagination */
+  .pagination {
+    margin-top: 40px;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+  }
+  
+  .pagination-button {
+    border: 2px solid var(--border-light);
+    background-color: var(--card-bg-light);
+    color: var(--primary-color);
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: var(--transition-fast);
+  }
+  
+  .pagination-button.active {
+    background-color: var(--primary-color);
+    color: var(--accent-light);
+    border-color: var(--primary-color);
+  }
+  
+  .pagination-button:hover:not(.active) {
+    background-color: var(--accent-light);
+    border-color: var(--accent-color);
+  }
+  
+  .dark-mode .pagination-button {
+    border-color: var(--border-dark);
+    background-color: var(--card-bg-dark);
+  }
+  
+  .dark-mode .pagination-button:hover:not(.active) {
+    background-color: var(--primary-light);
+    border-color: var(--accent-dark);
+  }
+  
+  /* Responsive */
+  @media (max-width: 992px) {
+    .my-lands-container {
+      padding: 20px;
+    }
+  
+    .landing-banner {
+      height: 220px;
+    }
+  
+    .banner-content h1 {
+      font-size: 2.5rem;
+    }
+  
+    .my-lands-grid {
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 25px;
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .my-lands-header {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 20px;
+    }
+    
+    .header-right {
+      width: 100%;
+      justify-content: space-between;
+    }
+  
+    .my-lands-title {
+      font-size: 1.8rem;
+    }
+    
+    .my-lands-controls {
+      flex-direction: column;
+      align-items: stretch;
+      gap: 15px;
+    }
+    
+    .search-wrapper {
+      max-width: 100%;
+    }
+    
+    .add-button {
+      width: 100%;
+      justify-content: center;
+    }
+    
+    .filters-panel {
+      grid-template-columns: 1fr;
+      padding: 20px;
+    }
+  
+    .banner-content h1 {
+      font-size: 2rem;
+    }
+  
+    .banner-content p {
+      font-size: 1.1rem;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .my-lands-container {
+      padding: 15px;
+    }
+  
+    .landing-banner {
+      height: 180px;
+      margin-bottom: 25px;
+    }
+  
+    .banner-content h1 {
+      font-size: 1.8rem;
+    }
+  
+    .banner-content p {
+      font-size: 1rem;
+    }
+  
+    .my-lands-grid {
+      grid-template-columns: 1fr;
+    }
+  
+    .contact-modal-content {
+      padding: 25px;
+    }
+  }
